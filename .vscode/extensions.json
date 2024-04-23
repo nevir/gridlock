@@ -1,0 +1,8 @@
+{
+  "recommendations": [
+    "amodio.toggle-excluded-files",
+    "dprint.dprint",
+    "fsevenm.run-it-on",
+    "tamasfe.even-better-toml",
+  ]
+}
