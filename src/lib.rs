@@ -1,5 +1,5 @@
-mod grid;
 mod grids;
+mod traits;
 
-pub use grid::*;
 pub use grids::*;
+pub use traits::*;

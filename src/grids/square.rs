@@ -1,56 +1,46 @@
-use std::marker::PhantomData;
+use crate::traits::*;
 
-use crate::grid::*;
-use num::Integer;
-
-// Coordinates
-
-pub struct SquareCoordinate<TComponent: Integer = u32> {
-  pub x: TComponent,
-  pub y: TComponent,
+pub struct SquareCoordinate {
+    pub x: i32,
+    pub y: i32,
 }
 
-impl<TComponent: Integer> Coordinate for SquareCoordinate<TComponent> {}
-
-// Cells
-
-pub struct SquareCell<TComponent: Integer = u32> {
-  component_type: PhantomData<TComponent>,
+pub struct SquareCell {
+    pub coordinate: SquareCoordinate,
 }
 
-impl<TComponent: Integer> Cell for SquareCell<TComponent> {
-  type Coordinate = SquareCoordinate<TComponent>;
-}
-
-// Grid
-
-pub struct SquareGrid<TComponent: Integer = u32> {
-  component_type: PhantomData<TComponent>,
-}
-
-impl<TComponent: Integer> SquareGrid<TComponent> {
-  pub fn new() -> Self {
-    Self {
-      component_type: PhantomData,
+impl Cell<SquareCoordinate> for SquareCell {
+    fn get_coordinate(&self) -> &SquareCoordinate {
+        return &self.coordinate;
     }
-  }
 }
 
-impl<TComponent: Integer> Grid<SquareCoordinate<TComponent>> for SquareGrid<TComponent> {
-  type Cell = SquareCell<TComponent>;
+pub struct SquareGrid {}
 
-  fn get_cell(&self, _coordinate: &SquareCoordinate<TComponent>) -> Option<Self::Cell> {
-    return None;
-  }
+impl Grid for SquareGrid {
+    type Cell = SquareCell;
+    type CellCoordinate = SquareCoordinate;
+
+    fn get_cell_at_coordinate(&self, _coordinate: &Self::CellCoordinate) -> Option<&Self::Cell> {
+        return None;
+    }
+}
+
+impl PlanarGrid for SquareGrid {
+    fn get_cell_center(&self, cell: &Self::Cell) -> PlanarPosition {
+        return PlanarPosition {
+            x: (cell.coordinate.x as f32) + 0.5,
+            y: (cell.coordinate.y as f32) + 0.5,
+        };
+    }
+
+    fn get_cell_at_position(&self, _position: &PlanarPosition) -> Option<&Self::Cell> {
+        return None;
+    }
 }
 
 #[cfg(test)]
 mod tests {
-    use crate::square::SquareGrid;
-
-  #[test]
-  fn it_works() {
-    let grid = SquareGrid::<u8>::new();
-
-  }
+    #[test]
+    fn it_works() {}
 }

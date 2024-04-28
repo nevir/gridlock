@@ -5,12 +5,12 @@
   // By default, we only show files that are commonly changed / core to the
   // project. Toogle them via the eye icon in the bottom right of VS Code.
   "files.exclude": {
-    "**/.*": false,
-    "**/*.lock": false,
-    "**/target/": false,
-    "dprint.json": false,
-    "rust-toolchain.toml": false,
-    "Taskfile*.yml": false
+    "**/.*": true,
+    "**/*.lock": true,
+    "**/target/": true,
+    "dprint.json": true,
+    "rust-toolchain.toml": true,
+    "Taskfile*.yml": true
   },
 
   // Formatting
@@ -27,10 +27,9 @@
   "files.trimFinalNewlines": true,
   "files.trimTrailingWhitespace": true,
 
-  // Testing
-  // =======
-
-
+  "[rust]": {
+    "editor.tabSize": 4
+  },
 
   // TOML
   // ====

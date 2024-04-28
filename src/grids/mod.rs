@@ -1,3 +1,5 @@
-pub mod square;
+mod hex;
+mod square;
 
-pub use self::square::SquareCoordinate;
+pub use hex::*;
+pub use square::*;
